@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.bkdwei.t3ExceptionAOP;
+package com.bkdwei.ExceptionAOP;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-@RequestMapping("t3")
+@RequestMapping("/exception")
 public class ExceptionDao {
     @RequestMapping("/test")
     public void generateException() {

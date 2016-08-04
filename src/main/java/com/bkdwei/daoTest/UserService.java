@@ -1,4 +1,4 @@
-package com.bkdwei.t2;
+package com.bkdwei.daoTest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,5 @@ public class UserService extends BaseService<User> implements IUserService {
 
     public User findUserByName(final String name) {
         return userDao.findUserByName(name);
-    }
-
-    public IUserDao getUserDao() {
-        return userDao;
     }
 }

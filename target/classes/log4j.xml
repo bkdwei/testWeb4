@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//Apache//DTD Log4j 1.2//EN"
+                                    "http://logging.apache.org/log4j/docs/api/org/apache/log4j/xml/log4j.dtd">
+<log4j:configuration>
+	<appender class="org.apache.log4j.ConsoleAppender" name="ConsoleAppender"> 
+    <param name="Threshold" value="debug"/>  
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n"/> 
+    </layout> 
+  </appender>  
+  <appender name="normalFile" class="org.apache.log4j.RollingFileAppender"> 
+    <!-- 设置日志输出文件名 -->  
+    <param name="File" value="${catalina.home}//logs//testWeb4.log"/>  
+    <!-- 设置是否在重新启动服务时，新建日志文件 -->  
+    <param name="Append" value="false"/>  
+    <param name="MaxBackupIndex" value="10"/>  
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%p (%c:%L)- %m%n"/> 
+    </layout> 
+  </appender>  
+  <appender name="errFile" class="org.apache.log4j.RollingFileAppender"> 
+    <!-- 设置日志输出文件名 -->  
+    <param name="File" value="${catalina.home}/logs/testWeb4_err.log"/>  
+    <param name="Append" value="false"/>  
+    <param name="MaxBackupIndex" value="10"/>  
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%p (%c:%L)- %m%n"/> 
+    </layout>  
+    <!-- 只记录ERROR及以上级别的日志 -->  
+    <filter class="org.apache.log4j.varia.LevelRangeFilter"> 
+      <param name="LevelMax" value="FATAL"/>  
+      <param name="LevelMin" value="ERROR"/> 
+    </filter> 
+  </appender>  
+  <appender name="activexAppender" class="org.apache.log4j.DailyRollingFileAppender"> 
+    <param name="File" value="/d/tomcat8/logs/testWeb41.log"/>  
+    <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>  
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="[%d{MMdd HH:mm:ss SSS\} %-5p] [%t] %c{3\} - %m%n"/> 
+    </layout> 
+  </appender>  
+  <category name="com.bkdwei"> 
+    <priority value="debug"/> 
+  </category>  
+  <category name="org.springframework"> 
+    <priority value="warn"/> 
+  </category>  
+  <category name="org.hibernate"> 
+    <priority value="info"/> 
+  </category>  
+  <category name="org.apache"> 
+    <priority value="warn"/> 
+  </category>  
+  <!-- 指定logger的设置，additivity指示是否遵循缺省的继承机制 -->  
+  <logger name="com.runway.bssp.activeXdemo" additivity="false"> 
+    <level value="info"/>  
+    <appender-ref ref="activexAppender"/> 
+  </logger>  
+  <root> 
+    <priority value="debug"/>  
+    <appender-ref ref="ConsoleAppender"/>  
+    <appender-ref ref="normalFile"/>  
+    <appender-ref ref="errFile"/>  
+    <appender-ref ref="activexAppender"/> 
+  </root> 
+</log4j:configuration>

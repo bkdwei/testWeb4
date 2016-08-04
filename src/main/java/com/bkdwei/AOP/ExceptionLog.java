@@ -1,4 +1,4 @@
-package com.bkdwei.core;
+package com.bkdwei.AOP;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;

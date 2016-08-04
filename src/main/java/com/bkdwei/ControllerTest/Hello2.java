@@ -1,4 +1,4 @@
-package com.bkdwei.t1;
+package com.bkdwei.ControllerTest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.InitBinder;

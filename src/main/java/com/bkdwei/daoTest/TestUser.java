@@ -1,4 +1,4 @@
-package com.bkdwei.t2;
+package com.bkdwei.daoTest;
 
 import java.util.HashMap;
 import java.util.List;
