@@ -11,4 +11,9 @@
   将springMVC-servlet.xml的配置信息拆分成多个spring-*.xml文件
   将数据库配置独立出来放到jdbc.properties
 
+更新日志：
+20160804：
+	更新pom中jar包的版本
+	替换log4j.properties为log4j.xml
+	新增AOP已支持性能监控和memcached
 

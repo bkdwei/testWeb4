@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bkdwei.AOP.introduction.ISayHello;
 import com.bkdwei.model.User;
 
 @Controller
@@ -47,6 +48,9 @@ public class TestUser {
         final User u1 = userService.findById(Integer.valueOf(id));
         final HashMap<String, User> map = new HashMap<String, User>();
         map.put("user", u1);
+        /* 引入增强 */
+        final ISayHello userServiceEnhance = (ISayHello) userService;
+        userServiceEnhance.sayHello();
         return new ModelAndView("user/showUser", map);
 
     }

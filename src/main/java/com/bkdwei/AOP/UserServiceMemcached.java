@@ -19,7 +19,7 @@ import net.spy.memcached.MemcachedClientIF;
 
 /**
  * 拦截service获取获取用户的方法，先从cache中查找，找不到再到数据库查找并存入缓存
- * 
+ *
  * @author bkd
  * @Date 2016年8月4日
  */
@@ -77,7 +77,7 @@ public class UserServiceMemcached {
         }
     }
 
-    @Pointcut("execution(* com.bkdwei.t2.UserService.*(..))&&args(name)")
+    @Pointcut("execution(* com.bkdwei.*.*Service.*(..))&&args(name)")
     public void userServicePoincut(final String name) {
     }
 }
