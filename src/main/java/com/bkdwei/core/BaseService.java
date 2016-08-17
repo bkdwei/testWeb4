@@ -2,6 +2,7 @@ package com.bkdwei.core;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,6 +22,22 @@ public class BaseService<T> implements IBaseService<T, Serializable> {
 
     public T findById(final int id) {
         return baseDao.findById(id);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see com.bkdwei.core.IBaseService#findByMap(java.util.Map)
+     */
+    public List<T> findListByMap(final Map map) {
+        return baseDao.findListByMap(map);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see com.bkdwei.core.IBaseService#findObjectByMap(java.util.Map)
+     */
+    public T findObjectByMap(final Map map) {
+        return baseDao.findObjectByMap(map);
     }
 
     public void save(final T entity) {

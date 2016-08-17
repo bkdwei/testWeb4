@@ -3,9 +3,12 @@
  */
 package com.bkdwei.AOP;
 
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+
+import com.bkdwei.model.User;
 
 /**
  * @author bkd
@@ -14,8 +17,10 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class SimpleApectJ {
-    @Around("execution(* com.bkdwei.*.*Service.*(..))&&args(name)")
-    public void infoUserName(final String name) {
+    @Around("execution(* com.bkdwei.*.UserService.*(..))&&args(name)")
+    public User infoUserName(final ProceedingJoinPoint joinPoint, final String name)
+            throws Throwable {
         System.out.println("in SimpleApectJ class,the username is " + name);
+        return (User) joinPoint.proceed();
     }
 }

@@ -5,15 +5,14 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.aop.ThrowsAdvice;
-import org.springframework.stereotype.Component;
+
+import com.bkdwei.utils.Log4JUtils;
 
 @Aspect
-@Component
-public class ExceptionLog implements ThrowsAdvice {
+public class ExceptionLogInterceptor implements ThrowsAdvice {
 
-    private static Logger logger = LoggerFactory.getLogger(ExceptionLog.class);
+    private static Logger logger = Log4JUtils.getLogger();
 
     /**
      * Owner 参数解释
@@ -36,7 +35,7 @@ public class ExceptionLog implements ThrowsAdvice {
 
     private void commonLoger(final JoinPoint joinPoint, final Throwable e,
             final String additionMsg) {
-        ExceptionLog.logger.error(additionMsg);
+        ExceptionLogInterceptor.logger.error(additionMsg);
 
         //获取用户请求方法的参数
         final StringBuffer params = new StringBuffer();
@@ -60,7 +59,7 @@ public class ExceptionLog implements ThrowsAdvice {
                 .append("\n异常详细信息：" + e.fillInStackTrace())
                 .append("\n堆栈详细信息:\n" + stackTrace.toString());
 
-        ExceptionLog.logger.error(fullExceptionMsg.toString());
+        ExceptionLogInterceptor.logger.error(fullExceptionMsg.toString());
     }
 
     @Pointcut("execution(* com.bkdwei..*Dao.*(..))")

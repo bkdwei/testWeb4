@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.bkdwei.memcached;
+package com.bkdwei.core.memcached;
 
 import java.util.List;
 

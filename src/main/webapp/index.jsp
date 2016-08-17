@@ -11,6 +11,8 @@
 <li><a href=<%=url+"/exception/test" %>>测试系统异常拦截</a></li>
 <li><a href=<%=url+"/mem/test" %>>测试memcached缓存</a></<li>
 <li><a href=<%=url+"/file/uploadFile.jsp" %>>测试文件上传</a></<li>
+<li><a href=<%=url+"/file/xlsUpload.jsp" %>>测试xls文件导入</a></<li>
+<li><a href=<%=url+"/person/findByName?name=bkd" %>>测试查找用户</a></<li>
 </ol>
 </body>
 </html>

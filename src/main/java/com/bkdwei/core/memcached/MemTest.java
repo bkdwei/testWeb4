@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.bkdwei.memcached;
+package com.bkdwei.core.memcached;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.bkdwei.daoTest.UserService;
 import com.bkdwei.model.User;
+import com.bkdwei.testCase.baseDao.UserService;
 
 /**
  * 测试Memcached

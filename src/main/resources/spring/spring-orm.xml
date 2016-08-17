@@ -20,18 +20,16 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="com.bkdwei.model" />
 		<property name="hibernateProperties">
-			<value>
-				hibernate.dialect=org.hibernate.dialect.MySQLDialect
-				hibernate.show_sql=false 
-				hibernate.format_sql=true
-				current_session_context_class=thread hibernate.jdbc.fetch_size=100
-				hibernate.jdbc.batch_size=100
-				hibernate.jdbc.batch_versioned_data=true
-				hibernate.order_inserts=true hibernate.order_updates=true
-				hibernate.cache.use_query_cache=false
-				hibernate.cache.use_second_level_cache=false
-				hbm2ddl.auto=true
-				</value>
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">false</prop>
+			</props>
+			<!-- <value> hibernate.dialect=org.hibernate.dialect.MySQLDialect hibernate.show_sql=true 
+				hibernate.format_sql=true current_session_context_class=thread hibernate.jdbc.fetch_size=100 
+				hibernate.jdbc.batch_size=100 hibernate.jdbc.batch_versioned_data=true hibernate.order_inserts=true 
+				hibernate.order_updates=true hibernate.cache.use_query_cache=false hibernate.cache.use_second_level_cache=false 
+				hbm2ddl.auto=create </value> -->
 		</property>
 	</bean>
 	<!-- 配置事务管理器 指定其作用的sessionFactory把事务交给Spring去处理 -->

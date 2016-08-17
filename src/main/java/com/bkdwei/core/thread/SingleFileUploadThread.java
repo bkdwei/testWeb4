@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.bkdwei.core;
+package com.bkdwei.core.thread;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
+ * 使用线程上传一个及多个文件
+ * 
  * @author bkd
  * @Date 2016年8月5日
  */

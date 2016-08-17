@@ -3,30 +3,25 @@
  */
 package com.bkdwei.AOP;
 
+import java.util.Map;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import com.bkdwei.core.memcached.MemcachedUtils;
-import com.bkdwei.model.User;
 
 import net.spy.memcached.KeyUtil;
 import net.spy.memcached.MemcachedClientIF;
 
 /**
- * 拦截service获取获取用户的方法，先从cache中查找，找不到再到数据库查找并存入缓存
- *
  * @author bkd
- * @Date 2016年8月4日
+ * @Date 2016年8月9日
  */
-@Component
-@Aspect
-public class UserServiceMemcached {
-    private static Logger logger = LoggerFactory.getLogger(PerformanceLogInterceptor.class);
+public class FindObjectByMapMemcachedInterceptor {
+    private static Logger logger = LoggerFactory.getLogger(FindObjectByMapMemcachedInterceptor.class);
 
     /* 验证key是否符合memcached的要求 */
     public static void validateKey(final String key) {
@@ -49,35 +44,35 @@ public class UserServiceMemcached {
     }
 
     @Around(
-            value = "userServicePoincut(name)")
-    public User doFindUser(final ProceedingJoinPoint joinPoint, final String name)
-            throws Throwable {
-        User user = null;
+            value = "findObjectByMap(map)")
+    public Object doFindUser(final ProceedingJoinPoint joinPoint, final Map map) throws Throwable {
+        Object obj = null;
         final StringBuffer key = new StringBuffer();
-        key.append("findUserByName_").append(name);
+        key.append("findObjectByMap_");
+
+        final java.util.Iterator it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            final java.util.Map.Entry entry = (java.util.Map.Entry) it.next();
+            key.append(entry.getKey() + "_" + entry.getValue());
+        }
         final String sKey = key.toString();
         validateKey(sKey);
-        /*
-         * for (final Map.Entry<String, String> m : condition.entrySet()) {
-         * key.append(m.getKey()).append("+").append(m.getValue());
-         * }
-         */
-        user = (User) MemcachedUtils.MEMCACHED_CLIENT.get(sKey);
+        obj = MemcachedUtils.MEMCACHED_CLIENT.get(sKey);
         System.out.println("key:" + key.toString());
-        if (user != null) {
-            logger.debug("从缓存中读取User对象。用户名为：" + name);
-            return user;
+        if (obj != null) {
+            logger.debug("从缓存中读取对象：" + map.toString());
+            return obj;
         } else {
-            user = (User) joinPoint.proceed();
-            if (user != null) {
-                MemcachedUtils.set(sKey, user, 1200000);
+            obj = joinPoint.proceed();
+            if (obj != null) {
+                MemcachedUtils.set(sKey, obj, 1200000);
                 logger.debug("从数据库中获取记录。并已将" + sKey + "存入缓存");
             }
-            return user;
+            return obj;
         }
     }
 
-    @Pointcut("execution(* com.bkdwei.*.UserService.*(..))&&args(name)")
-    public void userServicePoincut(final String name) {
+    @Pointcut("execution(* com.bkdwei.*.StudentService.*(..))&&args(map)")
+    public void findObjectByMapPoincut(final Map map) {
     }
 }

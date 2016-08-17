@@ -3,7 +3,7 @@
                                     "http://logging.apache.org/log4j/docs/api/org/apache/log4j/xml/log4j.dtd">
 <log4j:configuration>
 	<appender class="org.apache.log4j.ConsoleAppender" name="ConsoleAppender"> 
-    <param name="Threshold" value="debug"/>  
+    <param name="Threshold" value="trace"/>  
     <layout class="org.apache.log4j.PatternLayout"> 
       <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n"/> 
     </layout> 

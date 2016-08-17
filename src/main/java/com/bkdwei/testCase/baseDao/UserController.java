@@ -1,4 +1,4 @@
-package com.bkdwei.daoTest;
+package com.bkdwei.testCase.baseDao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,10 +13,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bkdwei.AOP.introduction.ISayHello;
 import com.bkdwei.model.User;
 
+/**
+ * 测试基于hibernate的通用dao：BaseDao
+ *
+ * @author bkd
+ * @Date 2016年8月17日
+ */
 @Controller
 @RequestMapping("/user")
-public class TestUser {
-    private static Logger logger = LoggerFactory.getLogger(TestUser.class);
+public class UserController {
+    private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService   userService;
@@ -59,11 +65,11 @@ public class TestUser {
     public ModelAndView listAll() {
         final HashMap<String, List<User>> map = new HashMap<String, List<User>>();
         map.put("userList", userService.findAll());
-        TestUser.logger.info("查询所有数据i。");
-        TestUser.logger.error("查询所有数据e。");
-        TestUser.logger.debug("查询所有数据d。");
-        TestUser.logger.trace("查询所有数据t。");
-        TestUser.logger.warn("查询所有数据w。");
+        UserController.logger.info("查询所有数据i。");
+        UserController.logger.error("查询所有数据e。");
+        UserController.logger.debug("查询所有数据d。");
+        UserController.logger.trace("查询所有数据t。");
+        UserController.logger.warn("查询所有数据w。");
         return new ModelAndView("user/listAll", map);
     }
 
